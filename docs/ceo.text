@@ -1,0 +1,89 @@
+* Ceo
+    - auth
+    - dashboard
+    - news
+    - categories
+    - widthdraw
+    - employers
+    - adverts
+
+
+1) Auth
+        - login
+                Ceo: {
+                    name: "Juratbek Xudayberganov"
+                    username: "string",
+                    password: "string"
+                }
+                
+2) Dashboard
+        - newsCount 
+                - newsLists
+                - newsFilter
+                
+        - views count
+        - adverts count
+        - categories count
+        - widthdraw requests count
+        - employers count
+        - admins count
+        
+        - overall/ daily/ weekly income
+        - financial costs
+
+
+3) News
+    - add news
+                news: {
+                    title: "news title",
+                    time: "12-oktabr, 12:00",
+                    views: 12345,
+                    image: "image.jpg",
+                    content: "ushbu voqea bu yilda sodir bolganligi malum!",
+                    categoryId: 1,
+                }
+
+    - lists of added news
+    - sorts/filter
+    
+4) Categories
+    - createCategory
+                category: {
+                    name: "muhim yanglilklar",
+                }
+    - lists of created category
+
+5) Widthdraw
+    - lists of widthdraw requests
+    - transfer money
+    - sort/filter
+
+6) Employers
+    - add employer
+                employer: {
+                    name: "Juratbek Xudayberganov",
+                    username: "juratbek",
+                    password: "juratali",
+                    role: Role,
+                    permission: Permissions[]
+                }
+
+
+                enum Permission {
+                    dashboard,
+                    employers,
+                    advertisment,
+                    widthdraw,
+                    categories,
+                    news
+                }
+
+    - lists of employers
+    - sort/filter
+
+7)Advertisment
+    - create ads
+    - lists of ads
+    - sort/filter
+
+    

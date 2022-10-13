@@ -1,0 +1,28 @@
+1) Users
+2) Ceo
+3) Admins
+
+
+1) Users
+    - reading news
+
+
+2) Admins
+    - auth
+    - createStream
+    - balans
+    - widthdraw
+    - statistics
+
+3) Ceo
+    - auth
+    - dashboard
+    - news
+    - categories
+    - widthdraw
+    - employers
+    - ads
+
+
+
+
