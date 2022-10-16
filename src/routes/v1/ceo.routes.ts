@@ -5,8 +5,7 @@ import { ceoSchema } from "../../schemas";
 
 const router = Router()
 
-// createCeo
-router.post('/auth', body(ceoSchema), creatingCeo)
-
+router
+    .post('/auth', body(ceoSchema), creatingCeo)
 
 export default router

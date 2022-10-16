@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
 import router from "./routes/router"
-
 import { serverConfig } from './configs/index'
 
 const app = express()
@@ -22,3 +21,4 @@ try {
     console.log(error);
 }
 
+    

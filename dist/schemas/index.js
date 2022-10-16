@@ -15,4 +15,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 exports.__esModule = true;
 __exportStar(require("./ceo.schema"), exports);
+__exportStar(require("./stream.schema"), exports);
+__exportStar(require("./admin.schema"), exports);
 //# sourceMappingURL=index.js.map

@@ -37,7 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.creatingCeo = void 0;
-var ceo_service_1 = require("../../services/ceo.service");
+var index_1 = require("../../services/index");
+var ceoService = new index_1.CeoService();
 var creatingCeo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, name, username, password, existsCeo, ceo, createdCeo, err_1;
     return __generator(this, function (_b) {
@@ -45,7 +46,7 @@ var creatingCeo = function (req, res, next) { return __awaiter(void 0, void 0, v
             case 0:
                 _b.trys.push([0, 3, , 4]);
                 _a = req.body, name = _a.name, username = _a.username, password = _a.password;
-                return [4 /*yield*/, (0, ceo_service_1.isCeoExicted)(username)];
+                return [4 /*yield*/, ceoService.isCeoExicted(username)];
             case 1:
                 existsCeo = _b.sent();
                 if (existsCeo) {
@@ -58,7 +59,7 @@ var creatingCeo = function (req, res, next) { return __awaiter(void 0, void 0, v
                     username: username,
                     password: password
                 };
-                return [4 /*yield*/, (0, ceo_service_1.createCeo)(ceo)];
+                return [4 /*yield*/, ceoService.createCeo(ceo)];
             case 2:
                 createdCeo = _b.sent();
                 return [2 /*return*/, res.status(201).json({

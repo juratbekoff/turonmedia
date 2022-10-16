@@ -21,13 +21,60 @@ model Ceo {
   permission  Permissions[]
 }
 
+model Admin {
+  id              Int @id @default(autoincrement())
+  name            String?
+  username        String 
+  password        String
+
+  role            Role @default(admin)
+
+  streams         Stream[]
+}
+
+
+model Stream {
+  id              Int @id @default(autoincrement())
+  name            String
+  adminId         Int?
+  newsId          Int?
+
+  stream_url      Int?  @unique @default(autoincrement())
+
+  admin           Admin? @relation(fields: [adminId], references: [id])
+  news            News? @relation(fields: [newsId], references: [id])
+  views           IPs[]
+}
+
+
+model News {
+  id            Int @id @default(autoincrement())
+  title         String
+  views         Int?
+  createdAt     DateTime?
+  lastSeen      DateTime?
+  viewers       IPs[]
+
+  streams       Stream[]
+}
+
+model IPs {
+  id          Int @id @default(autoincrement())
+  IP          String?
+  newsId      Int?
+  stream_url  Int?
+  
+  news        News? @relation(fields: [newsId], references: [id])
+  stream      Stream? @relation(fields: [stream_url], references: [stream_url])
+}
+
 
 enum Role {
     user
     employer
     admin
     ceo
-}
+} 
 
 enum Permissions {
   dashboard
@@ -35,3 +82,5 @@ enum Permissions {
   category
   widthdraw
 }
+
+
