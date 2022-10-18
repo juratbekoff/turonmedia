@@ -76,7 +76,8 @@ var StreamService = /** @class */ (function () {
                         },
                         include: {
                             views: true,
-                            news: true
+                            news: true,
+                            admin: true
                         }
                     })];
             });

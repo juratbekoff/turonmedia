@@ -28,4 +28,16 @@ export class AdminService  {
         let admin = await this.findAdminByName(username)
         return admin !== null;
     }
+
+    getAllAdmns = async () => {
+        return client.admin.findMany({
+            select: {
+                id: true,
+                name: true,
+                username: true,
+                current_balans: true,
+                streams: true,
+            }
+        })
+    }
 }

@@ -96,20 +96,16 @@ var ViewService = /** @class */ (function () {
         this.findNewsById = function (newsId) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, client.iPs.findFirst({
+                    case 0: return [4 /*yield*/, client.news.findFirst({
                             where: {
-                                newsId: newsId
+                                id: newsId
                             },
                             select: {
-                                news: {
-                                    select: {
-                                        id: true,
-                                        title: true,
-                                        views: true,
-                                        createdAt: true,
-                                        lastSeen: true
-                                    }
-                                }
+                                id: true,
+                                title: true,
+                                views: true,
+                                createdAt: true,
+                                lastSeen: true
                             }
                         })];
                     case 1: return [2 /*return*/, _a.sent()];

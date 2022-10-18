@@ -39,12 +39,13 @@ exports.__esModule = true;
 exports.createStream = void 0;
 var index_1 = require("../../services/index");
 var streamService = new index_1.StreamService();
+var balansService = new index_1.BalansService();
 var createStream = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var stream, createStream_1, error_1;
+    var stream, createStream_1, findAdminBalans, balans, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 6, , 7]);
                 stream = {
                     name: req.body.name,
                     adminId: +req.body.adminId,
@@ -53,15 +54,33 @@ var createStream = function (req, res, next) { return __awaiter(void 0, void 0, 
                 return [4 /*yield*/, streamService.createStream(stream)];
             case 1:
                 createStream_1 = _a.sent();
+                return [4 /*yield*/, balansService.findAdminBalans(createStream_1.stream_url)
+                    // add balans for balans model
+                ];
+            case 2:
+                findAdminBalans = _a.sent();
+                // add balans for balans model
+                return [4 /*yield*/, balansService.addBalans(0, findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.adminId, createStream_1.stream_url)];
+            case 3:
+                // add balans for balans model
+                _a.sent();
+                return [4 /*yield*/, balansService.findAdminAllBalans(findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.adminId)];
+            case 4:
+                balans = (_a.sent()).map(function (obj) { return obj.amount; }).reduce(function (acc, curr) { return acc + curr; });
+                // add balans
+                return [4 /*yield*/, balansService.addAmount(findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.adminId, balans)];
+            case 5:
+                // add balans
+                _a.sent();
                 return [2 /*return*/, res.status(200).json({
                         message: "Stream is created!",
                         stream_url: createStream_1.stream_url
                     })];
-            case 2:
+            case 6:
                 error_1 = _a.sent();
                 next(error_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
         }
     });
 }); };

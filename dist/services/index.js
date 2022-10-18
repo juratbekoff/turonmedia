@@ -19,4 +19,7 @@ __exportStar(require("./news.service"), exports);
 __exportStar(require("./admin.service"), exports);
 __exportStar(require("./views.service"), exports);
 __exportStar(require("./streams.service"), exports);
+__exportStar(require("./balans.service"), exports);
+__exportStar(require("./widthdraw.service"), exports);
+__exportStar(require("./dashboard.service"), exports);
 //# sourceMappingURL=index.js.map

@@ -6,6 +6,8 @@ var express_validius_1 = require("@verve-neowise/express-validius");
 var schemas_1 = require("../../schemas");
 var router = (0, express_1.Router)();
 router
-    .post('/register', (0, express_validius_1.body)(schemas_1.adminSchema), admin_1.adminRegister);
+    .post('/register', (0, express_validius_1.body)(schemas_1.adminSchema), admin_1.adminRegister)
+    .get('/:adminId', admin_1.getAdmin)
+    .get('/', admin_1.getAllAdmns);
 exports["default"] = router;
 //# sourceMappingURL=admin.routes.js.map

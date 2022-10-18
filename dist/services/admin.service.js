@@ -76,6 +76,19 @@ var AdminService = /** @class */ (function () {
                 }
             });
         }); };
+        this.getAllAdmns = function () { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, client.admin.findMany({
+                        select: {
+                            id: true,
+                            name: true,
+                            username: true,
+                            current_balans: true,
+                            streams: true
+                        }
+                    })];
+            });
+        }); };
     }
     return AdminService;
 }());

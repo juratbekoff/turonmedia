@@ -16,4 +16,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 exports.__esModule = true;
 __exportStar(require("./register"), exports);
 __exportStar(require("../streams/create-stream"), exports);
+__exportStar(require("./get-admin"), exports);
+__exportStar(require("./getallAdmins"), exports);
 //# sourceMappingURL=index.js.map

@@ -44,20 +44,16 @@ export class ViewService  {
     }
 
     findNewsById = async (newsId: number) => {
-        return await client.iPs.findFirst({
+        return await client.news.findFirst({
             where: {
-                newsId
+                id: newsId
             },
             select: {
-                news: {
-                    select: {
-                        id: true,
-                        title: true,
-                        views: true,
-                        createdAt: true,
-                        lastSeen: true
-                    }
-                }
+               id: true,
+               title: true,
+               views: true,
+               createdAt: true,
+               lastSeen: true
             }
         })
     }

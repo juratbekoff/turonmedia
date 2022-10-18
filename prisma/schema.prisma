@@ -11,70 +11,98 @@ datasource db {
 }
 
 model Ceo {
-  id        Int @id @default(autoincrement())
-  name      String?
-  username  String @unique
-  password  String
+  id       Int     @id @default(autoincrement())
+  name     String?
+  username String  @unique
+  password String
 
-  role      Role @default(ceo)
-  
-  permission  Permissions[]
+  role Role @default(ceo)
+
+  permission Permissions[]
 }
 
 model Admin {
-  id              Int @id @default(autoincrement())
-  name            String?
-  username        String 
-  password        String
+  id             Int     @id @default(autoincrement())
+  name           String?
+  username       String
+  password       String
+  current_balans Int?
 
-  role            Role @default(admin)
+  role Role @default(admin)
 
-  streams         Stream[]
+  streams      Stream[]
+  admin_balans Balans[]
+  widthdraws   Widthdraw[]
 }
 
+model Balans {
+  id     Int @id @default(autoincrement())
+  amount Int @default(0)
+
+  adminId  Int?
+  streamId Int?
+
+  admin  Admin?  @relation(fields: [adminId], references: [id])
+  stream Stream? @relation(fields: [streamId], references: [stream_url])
+}
+
+model Widthdraw {
+  id      Int             @id @default(autoincrement())
+  adminId Int?
+  amount  Int?
+  status  WidthdrawStatus @default(CHECKING)
+
+  admin Admin? @relation(fields: [adminId], references: [id])
+}
+
+enum WidthdrawStatus {
+  CHECKING
+  PAID
+  CANCELLED
+}
 
 model Stream {
-  id              Int @id @default(autoincrement())
-  name            String
-  adminId         Int?
-  newsId          Int?
+  id      Int    @id @default(autoincrement())
+  name    String
+  adminId Int?
+  newsId  Int?
 
-  stream_url      Int?  @unique @default(autoincrement())
+  stream_url Int? @unique @default(autoincrement())
 
-  admin           Admin? @relation(fields: [adminId], references: [id])
-  news            News? @relation(fields: [newsId], references: [id])
-  views           IPs[]
+  admin Admin? @relation(fields: [adminId], references: [id])
+  news  News?  @relation(fields: [newsId], references: [id])
+
+  views  IPs[]
+  balans Balans[]
 }
 
-
 model News {
-  id            Int @id @default(autoincrement())
-  title         String
-  views         Int?
-  createdAt     DateTime?
-  lastSeen      DateTime?
-  viewers       IPs[]
+  id        Int       @id @default(autoincrement())
+  title     String
+  views     Int?
+  createdAt DateTime?
+  lastSeen  DateTime?
+  viewers   IPs[]
 
-  streams       Stream[]
+  streams Stream[]
 }
 
 model IPs {
-  id          Int @id @default(autoincrement())
-  IP          String?
-  newsId      Int?
-  stream_url  Int?
-  
-  news        News? @relation(fields: [newsId], references: [id])
-  stream      Stream? @relation(fields: [stream_url], references: [stream_url])
+  id         Int     @id @default(autoincrement())
+  IP         String?
+  newsId     Int?
+  stream_url Int?
+
+  news   News?   @relation(fields: [newsId], references: [id])
+  stream Stream? @relation(fields: [stream_url], references: [stream_url])
 }
 
-
 enum Role {
-    user
-    employer
-    admin
-    ceo
-} 
+  user
+  employer
+  admin
+  ceo
+}
 
 enum Permissions {
   dashboard
@@ -82,5 +110,3 @@ enum Permissions {
   category
   widthdraw
 }
-
-

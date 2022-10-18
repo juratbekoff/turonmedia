@@ -46,7 +46,7 @@ var createView = function (req, res, next) { return __awaiter(void 0, void 0, vo
             case 0:
                 _a.trys.push([0, 7, , 8]);
                 newsId = +req.params.newsId;
-                IP = 'req.ip';
+                IP = 'req.ijuratekoffp';
                 return [4 /*yield*/, newsService.findIp(IP)];
             case 1:
                 findIp = _a.sent();
@@ -69,7 +69,7 @@ var createView = function (req, res, next) { return __awaiter(void 0, void 0, vo
                 oldNews = _a.sent();
                 return [2 /*return*/, res.status(200).send({
                         message: "ID ".concat(newsId, " news!"),
-                        news: oldNews === null || oldNews === void 0 ? void 0 : oldNews.news
+                        news: oldNews
                     })];
             case 7:
                 error_1 = _a.sent();

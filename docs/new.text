@@ -1,0 +1,27 @@
+user
+
+1) User = {
+    - fullname
+    - username
+    - password
+    - balans
+    - posts []
+    - statistics []
+}
+
+2) Channel = {
+    - nomi
+    - kategoriyasi
+    - username
+    - description
+}
+
+3) Posts = {
+    - create_post = {
+        - title,
+        - description,
+        - image | [],
+        - video | []
+    }
+}
+

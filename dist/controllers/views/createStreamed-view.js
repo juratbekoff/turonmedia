@@ -39,44 +39,65 @@ exports.__esModule = true;
 exports.createStreamedView = void 0;
 var services_1 = require("../../services");
 var newsService = new services_1.ViewService();
+var balansService = new services_1.BalansService();
 var createStreamedView = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var newsId, stream_url, IP, findIpOnly, countingViews, updatedViews, oldNews, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var newsId, stream_url, IP, findIpOnly, countingViews, updatedViews, findAdminBalans, balans, addBalans, oldNews, error_1;
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 7, , 8]);
+                _b.trys.push([0, 11, , 12]);
                 newsId = +req.body.newsId;
                 stream_url = +req.body.stream_url;
-                IP = String('kokaosaos');
+                IP = String("122111112");
                 return [4 /*yield*/, newsService.findIp(IP)];
             case 1:
-                findIpOnly = _a.sent();
-                if (!!findIpOnly) return [3 /*break*/, 5];
+                findIpOnly = _b.sent();
+                if (!!findIpOnly) return [3 /*break*/, 9];
                 return [4 /*yield*/, newsService.createIpWithStream(IP, newsId, stream_url)];
             case 2:
-                _a.sent();
+                _b.sent();
                 return [4 /*yield*/, newsService.findAllIP(newsId)];
             case 3:
-                countingViews = (_a.sent()).map(function (obj) { return obj.id; }).length;
+                countingViews = (_b.sent()).map(function (obj) { return obj.id; }).length;
                 return [4 /*yield*/, newsService.updatingViews(newsId, countingViews, new Date())];
             case 4:
-                updatedViews = _a.sent();
+                updatedViews = _b.sent();
+                return [4 /*yield*/, balansService.findAdminBalans(stream_url)
+                    // add balans for balans model
+                ];
+            case 5:
+                findAdminBalans = _b.sent();
+                // add balans for balans model
+                return [4 /*yield*/, balansService.addBalans(10, findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.adminId, stream_url)];
+            case 6:
+                // add balans for balans model
+                _b.sent();
+                return [4 /*yield*/, balansService.findAdminAllBalans(findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.adminId)];
+            case 7:
+                balans = (_b.sent()).map(function (obj) { return obj.amount; }).reduce(function (acc, curr) { return acc + curr; });
+                addBalans = ((_a = findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.admin) === null || _a === void 0 ? void 0 : _a.current_balans) + 10;
+                // add balans
+                return [4 /*yield*/, balansService.addAmount(findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.adminId, addBalans)];
+            case 8:
+                // add balans
+                _b.sent();
                 return [2 /*return*/, res.status(200).send({
                         message: "ID: ".concat(newsId, ", stream_url: ").concat(stream_url, " news!"),
                         news: updatedViews
                     })];
-            case 5: return [4 /*yield*/, newsService.findNewsById(newsId)];
-            case 6:
-                oldNews = _a.sent();
+            case 9: return [4 /*yield*/, newsService.findNewsById(newsId)];
+            case 10:
+                oldNews = _b.sent();
                 return [2 /*return*/, res.status(200).send({
                         message: "ID: ".concat(newsId, ", stream_url: ").concat(stream_url, " news!"),
-                        news: oldNews === null || oldNews === void 0 ? void 0 : oldNews.news
+                        news: oldNews
                     })];
-            case 7:
-                error_1 = _a.sent();
+            case 11:
+                error_1 = _b.sent();
                 next(error_1);
-                return [3 /*break*/, 8];
-            case 8: return [2 /*return*/];
+                return [3 /*break*/, 12];
+            case 12: return [2 /*return*/];
         }
     });
 }); };

@@ -30,7 +30,8 @@ export class StreamService {
             },
             include: {
                 views: true,
-                news: true
+                news: true,
+                admin: true
             }
         })
     }
