@@ -12,7 +12,7 @@ app.use(cors())
 app.use('/api', router)
 
 try {
-
+    
     app.listen(serverConfig.port, () => {
         console.log(`Server running on http://localhost:${serverConfig.port}`)
     })
