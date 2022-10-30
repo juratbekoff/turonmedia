@@ -17,4 +17,6 @@ exports.__esModule = true;
 __exportStar(require("./ceo.dto"), exports);
 __exportStar(require("./admin.dto"), exports);
 __exportStar(require("./streams.dto"), exports);
+__exportStar(require("./news.dto"), exports);
+__exportStar(require("./category.dto"), exports);
 //# sourceMappingURL=index.js.map

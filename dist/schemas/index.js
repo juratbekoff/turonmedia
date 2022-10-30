@@ -17,4 +17,6 @@ exports.__esModule = true;
 __exportStar(require("./ceo.schema"), exports);
 __exportStar(require("./stream.schema"), exports);
 __exportStar(require("./admin.schema"), exports);
+__exportStar(require("./category.schema"), exports);
+__exportStar(require("./news.schema"), exports);
 //# sourceMappingURL=index.js.map

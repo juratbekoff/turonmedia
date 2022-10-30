@@ -65,6 +65,18 @@ var AdminService = /** @class */ (function () {
                     })];
             });
         }); };
+        this.findAdminById = function (adminId) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, client.admin.findUnique({
+                            where: {
+                                id: adminId
+                            }
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
         this.isAdminExicted = function (username) { return __awaiter(_this, void 0, void 0, function () {
             var admin;
             return __generator(this, function (_a) {
@@ -78,15 +90,18 @@ var AdminService = /** @class */ (function () {
         }); };
         this.getAllAdmns = function () { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, client.admin.findMany({
-                        select: {
-                            id: true,
-                            name: true,
-                            username: true,
-                            current_balans: true,
-                            streams: true
-                        }
-                    })];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, client.admin.findMany({
+                            select: {
+                                id: true,
+                                name: true,
+                                username: true,
+                                current_balans: true,
+                                streams: true
+                            }
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
             });
         }); };
     }

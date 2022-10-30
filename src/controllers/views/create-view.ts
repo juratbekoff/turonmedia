@@ -16,7 +16,7 @@ export const createView = async (req: Request, res: Response, next: NextFunction
 
             let countingViews = (await newsService.findAllIP(newsId)).map(obj => obj.id).length
 
-            let updatedViews = await newsService.updatingViews(newsId, countingViews, new Date())
+            let updatedViews = await newsService.updatingViews(newsId, countingViews)
 
             return res.status(200).send({
                 message: `ID ${newsId} news!`,

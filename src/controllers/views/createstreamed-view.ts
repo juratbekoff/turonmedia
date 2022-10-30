@@ -9,17 +9,25 @@ export const createStreamedView = async (req: Request, res: Response, next: Next
 
         let newsId = +req.body.newsId
         let stream_url = +req.body.stream_url
-        let IP = String("122111112")        
+        let IP = String(12131)        
+
+        let checking = await newsService.checkingRight(newsId, stream_url)
+
+        if(!checking) {
+            return res.status(400).send({
+                message: `stream_url va newsId bir biriga mos emas!`
+            })
+        }
                 
-        let findIpOnly = await newsService.findIp(IP)
-        
-        if(!findIpOnly) {
+        let findIp = await newsService.findIpWithId(newsId, IP)
+                
+        if(findIp.length === 0) {
             
             await newsService.createIpWithStream(IP, newsId, stream_url)
 
             let countingViews = (await newsService.findAllIP(newsId)).map(obj => obj.id).length
                                             
-            let updatedViews = await newsService.updatingViews(newsId, countingViews, new Date())
+            let updatedViews = await newsService.updatingViews(newsId, countingViews)
   
             let findAdminBalans = await balansService.findAdminBalans(stream_url)
             

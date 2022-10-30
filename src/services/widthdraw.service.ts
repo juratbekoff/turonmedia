@@ -37,7 +37,7 @@ export class WidthdrawService {
     }
 
     getRequestListsByAdminId = async (adminId: number) => {
-        return client.widthdraw.findMany({
+        return await client.widthdraw.findMany({
             where: {
                 adminId
             },

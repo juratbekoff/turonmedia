@@ -11,10 +11,12 @@ datasource db {
 }
 
 model Ceo {
-  id       Int     @id @default(autoincrement())
-  name     String?
-  username String  @unique
-  password String
+  id        Int       @id @default(autoincrement())
+  name      String?
+  username  String    @unique
+  password  String
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt()
 
   role Role @default(ceo)
 
@@ -22,11 +24,14 @@ model Ceo {
 }
 
 model Admin {
-  id             Int     @id @default(autoincrement())
+  id             Int       @id @default(autoincrement())
   name           String?
   username       String
   password       String
   current_balans Int?
+  isPremium      Boolean?
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @updatedAt()
 
   role Role @default(admin)
 
@@ -36,8 +41,10 @@ model Admin {
 }
 
 model Balans {
-  id     Int @id @default(autoincrement())
-  amount Int @default(0)
+  id        Int       @id @default(autoincrement())
+  amount    Int       @default(0)
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt()
 
   adminId  Int?
   streamId Int?
@@ -77,14 +84,31 @@ model Stream {
 }
 
 model News {
-  id        Int       @id @default(autoincrement())
-  title     String
-  views     Int?
-  createdAt DateTime?
-  lastSeen  DateTime?
-  viewers   IPs[]
+  id          Int       @id @default(autoincrement())
+  title       String
+  descr       String
+  image       String?
+  preview     String
+  video       String?
+  createdAt   String?
+  views       Int?
 
-  streams Stream[]
+  viewers    IPs[]
+  streams    Stream[]
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  news News[]
+}
+
+model Bonus {
+  id     Int @id @default(autoincrement())
+  amount Int @default(0)
 }
 
 model IPs {

@@ -40,13 +40,13 @@ exports.creatingNews = void 0;
 var index_1 = require("../../services/index");
 var newsService = new index_1.NewsService();
 var creatingNews = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var title, createdNews, error_1;
+    var news, createdNews, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                title = req.body.title;
-                return [4 /*yield*/, newsService.createNews(title)];
+                news = req.body;
+                return [4 /*yield*/, newsService.createNews(news)];
             case 1:
                 createdNews = _a.sent();
                 return [2 /*return*/, res.status(200).send({

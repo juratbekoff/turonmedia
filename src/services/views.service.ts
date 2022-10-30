@@ -5,28 +5,17 @@ const client = new PrismaClient()
 export class ViewService  {
 
     // the views part wihtout Streams
-    updatingViews = async (id: number, views: number, lastSeen: Date) => {
+    updatingViews = async (id: number, views: number) => {
         return await client.news.update({
             where: {
                 id
             },
             data: {
                 views,
-                lastSeen
             }
         })
     }
-    
-    createIpWithoutStream = async (IP: string, newsId: number) => {
-            return await client.iPs.create({
-                data: {
-                    IP,
-                    newsId
-                }
-            })
-    }
 
-    // the views part with Streams! 
     updatingViewsWithStream = async (id: number, stream_url: number, views: number) => {
         return await client.news.updateMany({
             where: {
@@ -53,7 +42,16 @@ export class ViewService  {
                title: true,
                views: true,
                createdAt: true,
-               lastSeen: true
+            }
+        })
+    }
+
+    // IP
+    createIpWithoutStream = async (IP: string, newsId: number) => {
+        return await client.iPs.create({
+            data: {
+                IP,
+                newsId
             }
         })
     }
@@ -68,7 +66,6 @@ export class ViewService  {
         })
     }
 
-    // IP
     findIp = async (IP: string) => {
         return client.iPs.findFirst({
             where: {
@@ -87,5 +84,24 @@ export class ViewService  {
             }
         })
     }
+
+    findIpWithId = async (newsId: number, IP: string) => {
+         return client.iPs.findMany({
+            where: {
+                newsId,
+                IP,
+            }
+         })   
+    }  
+    
+    checkingRight = async (newsId: number, stream_url: number) => {
+        return client.stream.findFirst({
+            where: {
+                newsId,
+                stream_url
+            }
+        })
+    }
+    
 }
 

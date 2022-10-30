@@ -43,7 +43,7 @@ var ViewService = /** @class */ (function () {
     function ViewService() {
         var _this = this;
         // the views part wihtout Streams
-        this.updatingViews = function (id, views, lastSeen) { return __awaiter(_this, void 0, void 0, function () {
+        this.updatingViews = function (id, views) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, client.news.update({
@@ -51,28 +51,13 @@ var ViewService = /** @class */ (function () {
                                 id: id
                             },
                             data: {
-                                views: views,
-                                lastSeen: lastSeen
+                                views: views
                             }
                         })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
-        this.createIpWithoutStream = function (IP, newsId) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, client.iPs.create({
-                            data: {
-                                IP: IP,
-                                newsId: newsId
-                            }
-                        })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        }); };
-        // the views part with Streams! 
         this.updatingViewsWithStream = function (id, stream_url, views) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -104,8 +89,21 @@ var ViewService = /** @class */ (function () {
                                 id: true,
                                 title: true,
                                 views: true,
-                                createdAt: true,
-                                lastSeen: true
+                                createdAt: true
+                            }
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        // IP
+        this.createIpWithoutStream = function (IP, newsId) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, client.iPs.create({
+                            data: {
+                                IP: IP,
+                                newsId: newsId
                             }
                         })];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -126,7 +124,6 @@ var ViewService = /** @class */ (function () {
                 }
             });
         }); };
-        // IP
         this.findIp = function (IP) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, client.iPs.findFirst({
@@ -149,6 +146,26 @@ var ViewService = /** @class */ (function () {
                         })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
+            });
+        }); };
+        this.findIpWithId = function (newsId, IP) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, client.iPs.findMany({
+                        where: {
+                            newsId: newsId,
+                            IP: IP
+                        }
+                    })];
+            });
+        }); };
+        this.checkingRight = function (newsId, stream_url) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, client.stream.findFirst({
+                        where: {
+                            newsId: newsId,
+                            stream_url: stream_url
+                        }
+                    })];
             });
         }); };
     }

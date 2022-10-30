@@ -57,7 +57,7 @@ var createView = function (req, res, next) { return __awaiter(void 0, void 0, vo
                 return [4 /*yield*/, newsService.findAllIP(newsId)];
             case 3:
                 countingViews = (_a.sent()).map(function (obj) { return obj.id; }).length;
-                return [4 /*yield*/, newsService.updatingViews(newsId, countingViews, new Date())];
+                return [4 /*yield*/, newsService.updatingViews(newsId, countingViews)];
             case 4:
                 updatedViews = _a.sent();
                 return [2 /*return*/, res.status(200).send({

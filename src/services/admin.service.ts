@@ -23,6 +23,13 @@ export class AdminService  {
         })
     }
 
+    findAdminById = async (adminId: number) => {
+        return await client.admin.findUnique({
+            where: {
+                id: adminId
+            }
+        })
+    }
 
     isAdminExicted = async (username: string) => {
         let admin = await this.findAdminByName(username)
@@ -30,7 +37,7 @@ export class AdminService  {
     }
 
     getAllAdmns = async () => {
-        return client.admin.findMany({
+        return await client.admin.findMany({
             select: {
                 id: true,
                 name: true,

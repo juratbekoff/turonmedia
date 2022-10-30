@@ -27,6 +27,7 @@ export const adminRegister = async (req: Request, res: Response, next: NextFunct
 
         return res.status(201).json({
             message: `Ceo is created!`,
+            id: createdAdmin.id,
             admin_name: createdAdmin.name
         })
 

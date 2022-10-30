@@ -1,15 +1,20 @@
 import { PrismaClient } from "@prisma/client"
+import {NewsDto} from "./../models"
 
 const client = new PrismaClient()
 
 export class NewsService  {
 
-    createNews = async (title: string) => {
+    createNews = async (news: NewsDto) => {
         return client.news.create({
             data: {
-                title,
-                views: 0,
-                createdAt: new Date()
+                title: news.title,
+                descr: news.descr,
+                image: news.image || null,
+                preview: news.preview,
+                video: news.video || null,
+                categoryId: news.categoryId,
+                createdAt: new Date().toUTCString().toString()
             }
         })
     }
@@ -22,14 +27,13 @@ export class NewsService  {
         })
     }
     
-    updatingViews = async (id: number, views: number, lastSeen: Date) => {
+    updatingViews = async (id: number, views: number) => {
         return client.news.updateMany({
             where: {
                 id,
             },
             data: {
                 views,
-                lastSeen
             }
         })
     }

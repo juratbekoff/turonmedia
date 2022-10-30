@@ -16,4 +16,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 exports.__esModule = true;
 __exportStar(require("./getadmin-balans"), exports);
 __exportStar(require("./getbalans-bystream"), exports);
+__exportStar(require("./total-admin-wdithdraws"), exports);
 //# sourceMappingURL=index.js.map

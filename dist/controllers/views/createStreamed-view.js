@@ -41,63 +41,71 @@ var services_1 = require("../../services");
 var newsService = new services_1.ViewService();
 var balansService = new services_1.BalansService();
 var createStreamedView = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var newsId, stream_url, IP, findIpOnly, countingViews, updatedViews, findAdminBalans, balans, addBalans, oldNews, error_1;
+    var newsId, stream_url, IP, checking, findIp, countingViews, updatedViews, findAdminBalans, balans, addBalans, oldNews, error_1;
     var _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 11, , 12]);
+                _b.trys.push([0, 12, , 13]);
                 newsId = +req.body.newsId;
                 stream_url = +req.body.stream_url;
-                IP = String("122111112");
-                return [4 /*yield*/, newsService.findIp(IP)];
+                IP = String(12131);
+                return [4 /*yield*/, newsService.checkingRight(newsId, stream_url)];
             case 1:
-                findIpOnly = _b.sent();
-                if (!!findIpOnly) return [3 /*break*/, 9];
-                return [4 /*yield*/, newsService.createIpWithStream(IP, newsId, stream_url)];
+                checking = _b.sent();
+                if (!checking) {
+                    return [2 /*return*/, res.status(400).send({
+                            message: "stream_url va newsId bir biriga mos emas!"
+                        })];
+                }
+                return [4 /*yield*/, newsService.findIpWithId(newsId, IP)];
             case 2:
+                findIp = _b.sent();
+                if (!(findIp.length === 0)) return [3 /*break*/, 10];
+                return [4 /*yield*/, newsService.createIpWithStream(IP, newsId, stream_url)];
+            case 3:
                 _b.sent();
                 return [4 /*yield*/, newsService.findAllIP(newsId)];
-            case 3:
-                countingViews = (_b.sent()).map(function (obj) { return obj.id; }).length;
-                return [4 /*yield*/, newsService.updatingViews(newsId, countingViews, new Date())];
             case 4:
+                countingViews = (_b.sent()).map(function (obj) { return obj.id; }).length;
+                return [4 /*yield*/, newsService.updatingViews(newsId, countingViews)];
+            case 5:
                 updatedViews = _b.sent();
                 return [4 /*yield*/, balansService.findAdminBalans(stream_url)
                     // add balans for balans model
                 ];
-            case 5:
+            case 6:
                 findAdminBalans = _b.sent();
                 // add balans for balans model
                 return [4 /*yield*/, balansService.addBalans(10, findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.adminId, stream_url)];
-            case 6:
+            case 7:
                 // add balans for balans model
                 _b.sent();
                 return [4 /*yield*/, balansService.findAdminAllBalans(findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.adminId)];
-            case 7:
+            case 8:
                 balans = (_b.sent()).map(function (obj) { return obj.amount; }).reduce(function (acc, curr) { return acc + curr; });
                 addBalans = ((_a = findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.admin) === null || _a === void 0 ? void 0 : _a.current_balans) + 10;
                 // add balans
                 return [4 /*yield*/, balansService.addAmount(findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.adminId, addBalans)];
-            case 8:
+            case 9:
                 // add balans
                 _b.sent();
                 return [2 /*return*/, res.status(200).send({
                         message: "ID: ".concat(newsId, ", stream_url: ").concat(stream_url, " news!"),
                         news: updatedViews
                     })];
-            case 9: return [4 /*yield*/, newsService.findNewsById(newsId)];
-            case 10:
+            case 10: return [4 /*yield*/, newsService.findNewsById(newsId)];
+            case 11:
                 oldNews = _b.sent();
                 return [2 /*return*/, res.status(200).send({
                         message: "ID: ".concat(newsId, ", stream_url: ").concat(stream_url, " news!"),
                         news: oldNews
                     })];
-            case 11:
+            case 12:
                 error_1 = _b.sent();
                 next(error_1);
-                return [3 /*break*/, 12];
-            case 12: return [2 /*return*/];
+                return [3 /*break*/, 13];
+            case 13: return [2 /*return*/];
         }
     });
 }); };

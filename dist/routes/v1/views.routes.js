@@ -6,5 +6,6 @@ var router = (0, express_1.Router)();
 router
     .get('/common/:newsId', views_1.createView)
     .get('/streamed', views_1.createStreamedView);
+// tests
 exports["default"] = router;
 //# sourceMappingURL=views.routes.js.map

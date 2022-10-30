@@ -42,13 +42,17 @@ var client = new client_1.PrismaClient();
 var NewsService = /** @class */ (function () {
     function NewsService() {
         var _this = this;
-        this.createNews = function (title) { return __awaiter(_this, void 0, void 0, function () {
+        this.createNews = function (news) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, client.news.create({
                         data: {
-                            title: title,
-                            views: 0,
-                            createdAt: new Date()
+                            title: news.title,
+                            descr: news.descr,
+                            image: news.image || null,
+                            preview: news.preview,
+                            video: news.video || null,
+                            categoryId: news.categoryId,
+                            createdAt: new Date().toUTCString().toString()
                         }
                     })];
             });
@@ -62,15 +66,14 @@ var NewsService = /** @class */ (function () {
                     })];
             });
         }); };
-        this.updatingViews = function (id, views, lastSeen) { return __awaiter(_this, void 0, void 0, function () {
+        this.updatingViews = function (id, views) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, client.news.updateMany({
                         where: {
                             id: id
                         },
                         data: {
-                            views: views,
-                            lastSeen: lastSeen
+                            views: views
                         }
                     })];
             });

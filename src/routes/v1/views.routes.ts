@@ -7,4 +7,7 @@ router
     .get('/common/:newsId', createView)
     .get('/streamed', createStreamedView)
 
+
+    // tests
+
 export default router

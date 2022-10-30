@@ -13,6 +13,7 @@ var stream_routes_1 = __importDefault(require("./stream.routes"));
 var balans_routes_1 = __importDefault(require("./balans.routes"));
 var widthdraw_routes_1 = __importDefault(require("./widthdraw.routes"));
 var dashboard_routes_1 = __importDefault(require("./dashboard.routes"));
+var category_routes_1 = __importDefault(require("./category.routes"));
 var router = (0, express_1["default"])();
 router.use(express_1["default"].json());
 router.use(express_1["default"].urlencoded({ extended: true }));
@@ -25,5 +26,6 @@ router.use('/stream', stream_routes_1["default"]);
 router.use('/balans', balans_routes_1["default"]);
 router.use('/widthdraw', widthdraw_routes_1["default"]);
 router.use('/dashboard', dashboard_routes_1["default"]);
+router.use('/category', category_routes_1["default"]);
 exports["default"] = router;
 //# sourceMappingURL=index.js.map

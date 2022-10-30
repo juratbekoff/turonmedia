@@ -52,18 +52,19 @@ var requestWidthdraw = function (req, res, next) { return __awaiter(void 0, void
                 findAdminBalans = _b.sent();
                 if ((findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.current_balans) < amount) {
                     return [2 /*return*/, res.status(200).send({
-                            message: "Kechirasiz! siz maximum ".concat(findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.current_balans, " so'm yechib bilasiz!")
-                        })];
-                }
-                if ((findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.current_balans) === 0) {
-                    return [2 /*return*/, res.status(400).json({
-                            message: "Sizda sorov yuborish uchun mablag yetarli emas!",
+                            message: "Kechirasiz! sizning balansingiz, kiritilgan miqdorga teng emas!",
                             your_balans: findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.current_balans
                         })];
                 }
-                if ((findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.current_balans) < 40) {
+                else if (amount < 40) {
                     return [2 /*return*/, res.status(400).json({
                             message: "Kechirasiz! platformadan eng kamida 40 so'mdan kam bo'lmagan miqdorda pul yechish mumkin!",
+                            your_balans: findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.current_balans
+                        })];
+                }
+                else if ((findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.current_balans) === 0) {
+                    return [2 /*return*/, res.status(400).json({
+                            message: "Sizda sorov yuborish uchun mablag yetarli emas!",
                             your_balans: findAdminBalans === null || findAdminBalans === void 0 ? void 0 : findAdminBalans.current_balans
                         })];
                 }
@@ -76,6 +77,7 @@ var requestWidthdraw = function (req, res, next) { return __awaiter(void 0, void
                 requestWidthdraw_1 = _b.sent();
                 return [2 /*return*/, res.status(200).json({
                         message: "Pul yechish boyicha so'rovingiz qabul qilindi!",
+                        request_id: requestWidthdraw_1.id,
                         status: requestWidthdraw_1.status,
                         current_balans: decreasedCurrentBalans
                     })];

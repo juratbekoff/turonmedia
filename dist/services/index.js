@@ -22,4 +22,6 @@ __exportStar(require("./streams.service"), exports);
 __exportStar(require("./balans.service"), exports);
 __exportStar(require("./widthdraw.service"), exports);
 __exportStar(require("./dashboard.service"), exports);
+__exportStar(require("./bonus.service"), exports);
+__exportStar(require("./category.service"), exports);
 //# sourceMappingURL=index.js.map

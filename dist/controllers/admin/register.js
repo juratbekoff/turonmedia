@@ -64,6 +64,7 @@ var adminRegister = function (req, res, next) { return __awaiter(void 0, void 0,
                 createdAdmin = _b.sent();
                 return [2 /*return*/, res.status(201).json({
                         message: "Ceo is created!",
+                        id: createdAdmin.id,
                         admin_name: createdAdmin.name
                     })];
             case 3:

@@ -18,7 +18,7 @@ export const adminWidthdrawRequests= async (req: Request, res: Response, next: N
             return {
                 id,
                 amount,
-                status
+                status,
             }
         })
         
