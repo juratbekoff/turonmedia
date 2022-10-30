@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
 import router from "./routes/router"
-
 import { serverConfig } from './configs/index'
 
 const app = express()
@@ -13,7 +12,7 @@ app.use(cors())
 app.use('/api', router)
 
 try {
-
+    
     app.listen(serverConfig.port, () => {
         console.log(`Server running on http://localhost:${serverConfig.port}`)
     })
@@ -22,3 +21,4 @@ try {
     console.log(error);
 }
 
+    

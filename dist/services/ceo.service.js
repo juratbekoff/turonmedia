@@ -36,71 +36,71 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.allCeos = exports.deleteCeo = exports.isCeoExicted = exports.findCeoByName = exports.findCeoById = exports.createCeo = void 0;
+exports.CeoService = void 0;
 var client_1 = require("@prisma/client");
 var client = new client_1.PrismaClient();
-var createCeo = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2 /*return*/, client.ceo.create({
-                data: {
-                    name: data.name,
-                    username: data.username,
-                    password: data.password
-                }
-            })];
-    });
-}); };
-exports.createCeo = createCeo;
-var findCeoById = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2 /*return*/, client.ceo.findUnique({
-                where: {
-                    id: id
-                }
-            })];
-    });
-}); };
-exports.findCeoById = findCeoById;
-var findCeoByName = function (username) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2 /*return*/, client.ceo.findFirst({
+var CeoService = /** @class */ (function () {
+    function CeoService() {
+        var _this = this;
+        this.createCeo = function (data) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, client.ceo.create({
+                        data: {
+                            name: data.name,
+                            username: data.username,
+                            password: data.password
+                        }
+                    })];
+            });
+        }); };
+        this.findCeoById = function (id) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, client.ceo.findUnique({
+                        where: {
+                            id: id
+                        }
+                    })];
+            });
+        }); };
+        this.findCeoByName = function (username) {
+            return client.ceo.findFirst({
                 where: {
                     username: username
                 }
-            })];
-    });
-}); };
-exports.findCeoByName = findCeoByName;
-var isCeoExicted = function (username) { return __awaiter(void 0, void 0, void 0, function () {
-    var ceo;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, (0, exports.findCeoByName)(username)];
-            case 1:
-                ceo = _a.sent();
-                return [2 /*return*/, ceo !== null];
-        }
-    });
-}); };
-exports.isCeoExicted = isCeoExicted;
-var deleteCeo = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2 /*return*/, client.ceo["delete"]({
-                where: {
-                    id: id
+            });
+        };
+        this.isCeoExicted = function (username) { return __awaiter(_this, void 0, void 0, function () {
+            var ceo;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.findCeoByName(username)];
+                    case 1:
+                        ceo = _a.sent();
+                        return [2 /*return*/, ceo !== null];
                 }
-            })];
-    });
-}); };
-exports.deleteCeo = deleteCeo;
-var allCeos = function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2 /*return*/, client.ceo.findMany({
-                select: {
-                    name: true
-                }
-            })];
-    });
-}); };
-exports.allCeos = allCeos;
+            });
+        }); };
+        this.deleteCeo = function (id) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, client.ceo["delete"]({
+                        where: {
+                            id: id
+                        }
+                    })];
+            });
+        }); };
+        this.allCeos = function () { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, client.ceo.findMany({
+                        select: {
+                            name: true
+                        }
+                    })];
+            });
+        }); };
+    }
+    return CeoService;
+}());
+exports.CeoService = CeoService;
+exports["default"] = CeoService;
 //# sourceMappingURL=ceo.service.js.map

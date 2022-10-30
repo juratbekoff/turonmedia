@@ -1,1 +1,1 @@
-export * from "./create-ceo"
+export *  from "./create-ceo"

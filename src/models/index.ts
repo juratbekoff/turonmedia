@@ -1,1 +1,5 @@
 export * from "./ceo.dto"
+export * from "./admin.dto"
+export * from "./streams.dto"
+export * from "./news.dto"
+export * from "./category.dto"
